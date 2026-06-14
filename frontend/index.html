@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PromptForge</title>
+  <link rel="stylesheet" href="src/styles/main.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <div class="logo">⚡ PromptForge</div>
+        <span class="tagline">Build better prompts, faster</span>
+      </div>
+      <div class="header-right">
+        <button class="btn btn-ghost" id="historyBtn">📋 History</button>
+        <button class="btn btn-ghost" id="workflowsBtn">💾 Workflows</button>
+        <button class="btn btn-primary" id="newPromptBtn">+ New Prompt</button>
+      </div>
+    </header>
+
+    <!-- Main Layout -->
+    <main class="main-layout">
+
+      <!-- LEFT PANEL: Tree Navigation -->
+      <aside class="left-panel" id="leftPanel">
+        <div class="panel-title">Build Path</div>
+        <div class="breadcrumb" id="breadcrumb">
+          <span class="crumb active">Start</span>
+        </div>
+        <div class="tree-nav" id="treeNav"></div>
+      </aside>
+
+      <!-- CENTER: Prompt Canvas -->
+      <section class="center-panel">
+        <div class="canvas-header">
+          <span class="canvas-label" id="canvasLabel">Your Prompt</span>
+          <div class="canvas-actions">
+            <button class="btn btn-sm btn-ghost" id="copyBtn">📋 Copy</button>
+            <button class="btn btn-sm btn-ghost" id="clearBtn">🗑 Clear</button>
+            <button class="btn btn-sm btn-accent" id="enhanceBtn">✨ Enhance with AI</button>
+          </div>
+        </div>
+        <textarea class="prompt-canvas" id="promptCanvas" placeholder="Your prompt will appear here as you make selections. You can also type directly..."></textarea>
+        <div class="canvas-footer">
+          <span class="char-count" id="charCount">0 characters</span>
+          <button class="btn btn-primary btn-lg" id="saveWorkflowBtn">💾 Save as Workflow</button>
+        </div>
+
+        <!-- AI Questions Panel -->
+        <div class="questions-panel" id="questionsPanel" style="display:none;">
+          <div class="questions-header">
+            <span>📝 Fill in the blanks</span>
+            <button class="btn btn-sm btn-ghost" id="closeQuestionsBtn">✕</button>
+          </div>
+          <div class="questions-list" id="questionsList"></div>
+          <button class="btn btn-primary" id="buildPromptBtn">Build Prompt →</button>
+        </div>
+      </section>
+
+      <!-- RIGHT PANEL: Options & Controls -->
+      <aside class="right-panel" id="rightPanel">
+        <div class="panel-title">Options</div>
+        <div class="options-content" id="optionsContent">
+          <p class="placeholder-text">Select a category to see options</p>
+        </div>
+
+        <!-- Workflow Panel -->
+        <div class="workflow-section" id="workflowSection" style="display:none;">
+          <div class="panel-title">Saved Workflows</div>
+          <div class="workflow-list" id="workflowList"></div>
+        </div>
+      </aside>
+
+    </main>
+
+    <!-- Category Grid (shown on start) -->
+    <div class="category-overlay" id="categoryOverlay">
+      <div class="category-hero">
+        <h1>What are you building today?</h1>
+        <p>Select a category to start building your perfect prompt</p>
+      </div>
+      <div class="category-grid" id="categoryGrid"></div>
+    </div>
+
+    <!-- Save Workflow Modal -->
+    <div class="modal-overlay" id="modalOverlay" style="display:none;">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Save Workflow</h3>
+          <button class="btn btn-ghost" id="closeModalBtn">✕</button>
+        </div>
+        <div class="modal-body">
+          <label>Workflow Name</label>
+          <input type="text" id="workflowName" class="input" placeholder="e.g. Weekly Blog Post Template" />
+          <label>Description (optional)</label>
+          <input type="text" id="workflowDesc" class="input" placeholder="What is this workflow for?" />
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-ghost" id="cancelModalBtn">Cancel</button>
+          <button class="btn btn-primary" id="confirmSaveBtn">Save Workflow</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+  </div>
+
+  <script src="src/utils/api.js"></script>
+  <script src="src/components/dashboard.js"></script>
+  <script src="src/components/promptTree.js"></script>
+  <script src="src/components/workflowPanel.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>
